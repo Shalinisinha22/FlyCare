@@ -214,6 +214,67 @@ export const AboutUs = (): JSX.Element => {
         </div>
       </section>
 
+
+       {/* Our Certifications */}
+       <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50">
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#136ea1] mb-4">
+            Our Certifications
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            We maintain the highest standards of quality and safety through internationally recognized certifications
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          {[
+            {
+              name: 'ISO 9001:2015',
+              description: 'Quality Management System',
+              icon: 'https://images.pexels.com/photos/6663600/pexels-photo-6663600.jpeg?auto=compress&cs=tinysrgb&w=200'
+            },
+            {
+              name: 'ISO 14001:2015',
+              description: 'Environmental Management',
+              icon: 'https://images.pexels.com/photos/6663601/pexels-photo-6663601.jpeg?auto=compress&cs=tinysrgb&w=200'
+            },
+            {
+              name: 'FDA Approved',
+              description: 'Food & Drug Administration',
+              icon: 'https://images.pexels.com/photos/6663602/pexels-photo-6663602.jpeg?auto=compress&cs=tinysrgb&w=200'
+            },
+            {
+              name: 'CE Marking',
+              description: 'European Conformity',
+              icon: 'https://images.pexels.com/photos/6663603/pexels-photo-6663603.jpeg?auto=compress&cs=tinysrgb&w=200'
+            }
+          ].map((cert, index) => (
+            <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+              <CardContent className="p-6">
+                <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                  <img
+                    className="w-10 h-10 object-contain"
+                    alt={cert.name}
+                    src={cert.icon}
+                  />
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{cert.name}</h3>
+                <p className="text-gray-600 text-sm">{cert.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-gray-600 mb-6">
+            All our products undergo rigorous testing and quality checks to ensure they meet international standards
+          </p>
+          <Button className="bg-[#136ea1] hover:bg-[#0f5a8a]">
+            View All Certifications
+          </Button>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -2,82 +2,132 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
-import { Play, ArrowRight, Star, Users, Award, Shield, ShoppingCart, Eye } from "lucide-react";
-import product from "../../assets/FD"; 
+import { Play, Users, Award, Shield, ShoppingCart, Eye } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, ArrowRight, Calendar, User } from 'lucide-react';
+import p1 from "../../assets/product/DF 02.png";
+
+import p2 from "../../assets/product/DF 09 1.png"
+
+import p3 from "../../assets/product/FD32.png"
+
+import p4 from "../../assets/product/FD35.png"
+import Hb1 from "../../assets/banner/Hb1.png";
+import Hb2 from "../../assets/banner/Hb2.png";
+
+import mb1 from "../../assets/banner/Rectangle 11.png";
+import mb2 from "../../assets/banner/Rectangle 12.png";
+
 export const HomePage = (): JSX.Element => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  // Carousel banner state
+  const bannerImages = [Hb1, Hb2];
+  const [currentBanner, setCurrentBanner] = useState(0);
+
+  // Auto-rotate banner
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % bannerImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [bannerImages.length]);
+
+  const nextBanner = () => setCurrentBanner((prev) => (prev + 1) % bannerImages.length);
+  const prevBanner = () => setCurrentBanner((prev) => (prev - 1 + bannerImages.length) % bannerImages.length);
 
   // Featured products data
   const featuredProducts = [
     {
       id: 1,
-      name: "Ultra Comfort Pads",
-      image: "https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=600",
-      price: "₹299",
-      originalPrice: "₹399",
-      discount: "25% OFF",
+      name: 'FlyCare Ultra Soft Pads',
+      price: '₹299',
+      originalPrice: '₹399',
       rating: 4.8,
-      reviews: 1250,
-      features: ["12-hour protection", "Gel Lock Technology", "Ultra-soft surface"]
+      reviews: 245,
+      images: [p1, p2, p3, p4],
+      currentImageIndex: 0,
+      badge: 'Best Seller'
     },
     {
       id: 2,
-      name: "Premium Baby Diapers",
-      image: "https://images.pexels.com/photos/3985363/pexels-photo-3985363.jpeg?auto=compress&cs=tinysrgb&w=600",
-      price: "₹599",
-      originalPrice: "₹799",
-      discount: "25% OFF",
+      name: 'FlyCare Night Protection',
+      price: '₹349',
+      originalPrice: '₹449',
       rating: 4.9,
-      reviews: 890,
-      features: ["All-day comfort", "Leak-proof design", "Gentle on skin"]
+      reviews: 189,
+      images: [p1, p2, p3, p4],
+      currentImageIndex: 0,
+      badge: 'New'
     },
     {
       id: 3,
-      name: "Overnight Protection",
-      image: "https://images.pexels.com/photos/3683107/pexels-photo-3683107.jpeg?auto=compress&cs=tinysrgb&w=600",
-      price: "₹349",
-      originalPrice: "₹449",
-      discount: "22% OFF",
+      name: 'FlyCare Daily Comfort',
+      price: '₹199',
+      originalPrice: '₹249',
       rating: 4.7,
-      reviews: 2100,
-      features: ["Extra-long coverage", "Superior absorption", "Odor control"]
+      reviews: 312,
+      images: [p1, p2, p3, p4],
+      currentImageIndex: 0,
+      badge: 'Popular'
     },
     {
       id: 4,
-      name: "Daily Comfort Liners",
-      image: "https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg?auto=compress&cs=tinysrgb&w=600",
-      price: "₹199",
-      originalPrice: "₹249",
-      discount: "20% OFF",
-      rating: 4.6,
-      reviews: 750,
-      features: ["Breathable material", "Flexible fit", "Natural cotton"]
-    },
-    {
-      id: 5,
-      name: "Sensitive Skin Care",
-      image: "https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=600",
-      price: "₹399",
-      originalPrice: "₹499",
-      discount: "20% OFF",
-      rating: 4.8,
-      reviews: 650,
-      features: ["Hypoallergenic", "Dermatologically tested", "Chemical-free"]
-    },
-    {
-      id: 6,
-      name: "Active Lifestyle Pads",
-      image: "https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=600",
-      price: "₹329",
-      originalPrice: "₹429",
-      discount: "23% OFF",
-      rating: 4.7,
-      reviews: 980,
-      features: ["Flexible wings", "Secure fit", "Movement-friendly"]
+      name: 'FlyCare Organic Cotton',
+      price: '₹399',
+      originalPrice: '₹499',
+      rating: 4.9,
+      reviews: 156,
+      images: [p1, p2, p3, p4],
+      currentImageIndex: 0,
+      badge: 'Eco-Friendly'
     }
   ];
 
+
+  // Hot Selling Products
+  const hotSellingProducts = [
+    {
+      id: 5,
+      name: 'FlyCare XL Pads',
+      price: '₹279',
+      originalPrice: '₹329',
+      rating: 4.6,
+      reviews: 198,
+      images: [p1, p2, p3, p4],
+      discount: '15% OFF'
+    },
+    {
+      id: 6,
+      name: 'FlyCare Panty Liners',
+      price: '₹149',
+      originalPrice: '₹179',
+      rating: 4.5,
+      reviews: 267,
+      images: [p1, p2, p3, p4],
+      discount: '17% OFF'
+    },
+    {
+      id: 7,
+      name: 'FlyCare Heavy Flow',
+      price: '₹329',
+      originalPrice: '₹399',
+      rating: 4.8,
+      reviews: 143,
+      images: [p1, p2, p3, p4],
+      discount: '18% OFF'
+    },
+    {
+      id: 7,
+      name: 'FlyCare Heavy Flow',
+      price: '₹329',
+      originalPrice: '₹399',
+      rating: 4.8,
+      reviews: 143,
+      images: [p1, p2, p3, p4],
+      discount: '18% OFF'
+    }
+  ];
   // Brand logos data
   const brands = [
     {
@@ -140,6 +190,41 @@ export const HomePage = (): JSX.Element => {
     { icon: Star, value: "4.8", label: "Customer Rating" },
   ];
 
+
+  // Blog posts
+  const blogPosts = [
+    {
+      id: 1,
+      title: 'Understanding Menstrual Health: A Complete Guide',
+      excerpt: 'Learn about menstrual health, hygiene practices, and how to choose the right products for your needs.',
+      image: 'https://images.pexels.com/photos/6663588/pexels-photo-6663588.jpeg?auto=compress&cs=tinysrgb&w=400',
+      author: 'Dr. Sarah Johnson',
+      date: '2024-01-15',
+      category: 'Health',
+      readTime: '5 min read'
+    },
+    {
+      id: 2,
+      title: 'Sustainable Period Products: Making Eco-Friendly Choices',
+      excerpt: 'Discover how sustainable period products can benefit both your health and the environment.',
+      image: 'https://images.pexels.com/photos/6663589/pexels-photo-6663589.jpeg?auto=compress&cs=tinysrgb&w=400',
+      author: 'Emma Green',
+      date: '2024-01-12',
+      category: 'Sustainability',
+      readTime: '4 min read'
+    },
+    {
+      id: 3,
+      title: 'Breaking Period Taboos: Empowering Women Through Education',
+      excerpt: 'How education and open conversations can help break the stigma around menstruation.',
+      image: 'https://images.pexels.com/photos/6663590/pexels-photo-6663590.jpeg?auto=compress&cs=tinysrgb&w=400',
+      author: 'Priya Sharma',
+      date: '2024-01-10',
+      category: 'Education',
+      readTime: '6 min read'
+    }
+  ];
+
   // Auto-rotate testimonials
   useEffect(() => {
     const interval = setInterval(() => {
@@ -148,42 +233,88 @@ export const HomePage = (): JSX.Element => {
     return () => clearInterval(interval);
   }, []);
 
+  // Add state to track current image index for each product in both featured and hot selling products
+  const [featuredImageIndexes, setFeaturedImageIndexes] = useState<{ [id: number]: number }>({});
+  const [hotImageIndexes, setHotImageIndexes] = useState<{ [id: number]: number }>({});
+
+  const handleNextFeaturedImage = (id: number, images: string[]) => {
+    setFeaturedImageIndexes(prev => ({
+      ...prev,
+      [id]: (prev[id] === undefined ? 1 : (prev[id] + 1) % images.length)
+    }));
+  };
+  const handlePrevFeaturedImage = (id: number, images: string[]) => {
+    setFeaturedImageIndexes(prev => ({
+      ...prev,
+      [id]: (prev[id] === undefined ? images.length - 1 : (prev[id] - 1 + images.length) % images.length)
+    }));
+  };
+  const handleNextHotImage = (id: number, images: string[]) => {
+    setHotImageIndexes(prev => ({
+      ...prev,
+      [id]: (prev[id] === undefined ? 1 : (prev[id] + 1) % images.length)
+    }));
+  };
+  const handlePrevHotImage = (id: number, images: string[]) => {
+    setHotImageIndexes(prev => ({
+      ...prev,
+      [id]: (prev[id] === undefined ? images.length - 1 : (prev[id] - 1 + images.length) % images.length)
+    }));
+  };
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`w-3 h-3 ${i < Math.floor(rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+      />
+    ));
+  };
+
+  const [productImages, setProductImages] = useState(featuredProducts);
+
   return (
     <div className="bg-white w-full">
-      {/* Hero Banner */}
-      <section className="relative h-[50vh] lg:h-[70vh] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#136ea1]/90 to-[#136ea1]/70 z-10"></div>
-        <img
-          className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-          alt="Hero banner"
-          src="https://images.pexels.com/photos/3683107/pexels-photo-3683107.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800"
-        />
-        <div className="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
-          <div className="max-w-4xl animate-fade-in-up">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Born to Fly with
-              <span className="block text-yellow-300">Comfort & Care</span>
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Discover our certified and innovative sanitary products with advanced Gel Lock Technology
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link to="/sanitary-pads">
-                <Button className="group bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold px-10 py-4 rounded-full transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-200/50">
-                  Explore Products
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-              <Link to="/order">
-                <Button className="group bg-[#136ea1] hover:bg-[#0f5a8a] text-white font-bold px-10 py-4 rounded-full transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-blue-200/50">
-                  Order Now
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
-          </div>
+      {/* Carousel Banner */}
+      <section className="relative h-[30vh] md:h-[50vh] lg:h-[60vh] overflow-hidden">
+        <div className="w-full h-full relative">
+          {bannerImages.map((img, idx) => (
+            <img
+              key={idx}
+              src={img}
+              alt={`Banner ${idx + 1}`}
+              className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-700 ease-in-out ${idx === currentBanner ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+              style={{ transitionProperty: 'opacity' }}
+            />
+          ))}
+        </div>
+        {/* Navigation */}
+        <button
+          onClick={prevBanner}
+          className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-3 md:p-2 shadow-lg z-20"
+          style={{ touchAction: 'manipulation' }}
+        >
+          <ChevronLeft className="w-7 h-7 md:w-6 md:h-6 text-[#136ea1]" />
+        </button>
+        <button
+          onClick={nextBanner}
+          className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-3 md:p-2 shadow-lg z-20"
+          style={{ touchAction: 'manipulation' }}
+        >
+          <ChevronRight className="w-7 h-7 md:w-6 md:h-6 text-[#136ea1]" />
+        </button>
+        {/* Indicators */}
+        <div className="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+          {bannerImages.map((_, idx) => (
+            <span
+              key={idx}
+              className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${idx === currentBanner ? 'text-[#136ea1]' : 'bg-white border border-blue-600'}`}
+            />
+          ))}
         </div>
       </section>
+
+
 
       {/* Stats Section */}
       <section className="py-12 lg:py-16 bg-gray-50">
@@ -195,7 +326,7 @@ export const HomePage = (): JSX.Element => {
                 className="text-center group hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#136ea1] text-white rounded-full mb-4 group-hover:bg-[#0f5a8a] transition-colors duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#FFD600] text-white rounded-full mb-4 group-hover:bg-yellow-400 transition-colors duration-300">
                   <stat.icon className="w-8 h-8" />
                 </div>
                 <div className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
@@ -207,95 +338,98 @@ export const HomePage = (): JSX.Element => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#136ea1] mb-4">
-              Featured Products
-            </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-              Discover Our Best-Selling and Most Loved Products - Certified and Innovative Solutions for Your Comfort
-            </p>
-          </div>
+      {/* Featured Products Section */}
+      <section className="py-16 px-4 md:px-8 lg:px-16">
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#136ea1] mb-4">
+            Our Featured Products
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Discover Our Certified and Innovative Sanitary Pads, Napkins & Liners - Born to Fly with Gel Lock Technology!
+          </p>
+        </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {featuredProducts.map((product, index) => (
-              <Card
-                key={product.id}
-                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-md overflow-hidden animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                    {product.discount}
-                  </div>
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                    <Link to={`/product/${product.id}`}>
-                      <Button size="sm" className="bg-white text-gray-900 hover:bg-gray-100">
-                        <Eye className="w-4 h-4 mr-2" />
-                        View
-                      </Button>
-                    </Link>
-                    {/* <Button size="sm" className="bg-[#136ea1] hover:bg-[#0f5a8a]">
-                      <ShoppingCart className="w-4 h-4 mr-2" />
-                      Cart
-                    </Button> */}
-                  </div>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-[#136ea1] transition-colors duration-300">
-                    {product.name}
-                  </h3>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            i < Math.floor(product.rating)
-                              ? "text-yellow-400 fill-current"
-                              : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-sm text-gray-500">({product.reviews})</span>
-                  </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-lg font-bold text-[#136ea1]">{product.price}</span>
-                    <span className="text-sm text-gray-500 line-through">{product.originalPrice}</span>
-                  </div>
-                  <div className="space-y-1 mb-4">
-                    {product.features.map((feature, idx) => (
-                      <div key={idx} className="text-xs text-gray-600 flex items-center">
-                        <div className="w-1 h-1 bg-[#136ea1] rounded-full mr-2"></div>
-                        {feature}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {productImages.map((product, index) => (
+            <Link key={product.id} to={`/product/${product.id}`}>
+              <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    {product.badge && (
+                      <div className="absolute top-3 left-3 z-10 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                        {product.badge}
                       </div>
+                    )}
+
+<div className="w-full flex justify-center align-center">
+  <img
+                    className="w-60 h-40 object-contain group-hover:scale-110 transition-transform duration-300"
+                    alt={product.name}
+                    src={product.images[featuredImageIndexes[product.id] ?? 0]}
+                  />
+</div>
+                
+
+                  {/* Image Navigation */}
+                  <button
+                    onClick={() => handlePrevFeaturedImage(product.id, product.images)}
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => handleNextFeaturedImage(product.id, product.images)}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+
+                  {/* Image Indicators */}
+                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                    {product.images.map((_, imgIndex) => (
+                      <div
+                        key={imgIndex}
+                        className={`w-2 h-2 rounded-full ${imgIndex === featuredImageIndexes[product.id] ? 'bg-white' : 'bg-white/50'}`}
+                      />
                     ))}
                   </div>
-                  <Link to="/order">
-                    <Button className="w-full bg-[#136ea1] hover:bg-[#0f5a8a] transition-all duration-300 transform hover:scale-105">
-                    Get Quotation
+
+                  {/* Rating Badge */}
+                  <div className="absolute bottom-3 right-3 bg-white/90 rounded-lg px-2 py-1 flex items-center space-x-1">
+                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    <span className="text-xs font-semibold">{product.rating}</span>
+                  </div>
+                </div>
+
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2 group-hover:text-[#136ea1] transition-colors">
+                    {product.name}
+                  </h3>
+
+                  <div className="flex items-center mb-2">
+                    <div className="flex items-center mr-2">
+                      {renderStars(product.rating)}
+                    </div>
+                    <span className="text-sm text-gray-500">({product.reviews} reviews)</span>
+                  </div>
+
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xl font-bold text-[#136ea1]">{product.price}</span>
+                      <span className="text-sm text-gray-500 line-through">{product.originalPrice}</span>
+                    </div>
+                  </div>
+
+                  <Link to={`/quotation/${product.id}`}>
+                    <Button className="w-full bg-[#136ea1] hover:bg-[#0f5a8a] transform hover:scale-105 transition-all duration-200">
+                      Get a Quotation
                     </Button>
                   </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Link to="/sanitary-pads">
-              <Button variant="outline" className="border-[#136ea1] text-[#136ea1] hover:bg-[#136ea1] hover:text-white px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300">
-                View All Products
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+                </div>
+              </CardContent>
+            </Card>
             </Link>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -314,7 +448,7 @@ export const HomePage = (): JSX.Element => {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="group relative h-64 lg:h-80 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
               <img
-                src="https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=800&h=600"
+                src={mb1}
                 alt="Sanitary Pads"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -334,7 +468,7 @@ export const HomePage = (): JSX.Element => {
 
             <div className="group relative h-64 lg:h-80 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
               <img
-                src="https://images.pexels.com/photos/3985363/pexels-photo-3985363.jpeg?auto=compress&cs=tinysrgb&w=800&h=600"
+                src={mb2}
                 alt="Baby Diapers"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -355,6 +489,76 @@ export const HomePage = (): JSX.Element => {
         </div>
       </section>
 
+      {/* Hot Selling Products */}
+      <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50">
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#136ea1] mb-4">
+            Hot Selling Products
+          </h2>
+          <p className="text-gray-600">
+            Explore Our Trendsetting and In-Demand Hot Selling Products
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {hotSellingProducts.map((product, index) => (
+            <Link key={product.id} to={`/product/${product.id}`}>
+              <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <div className="absolute top-3 left-3 z-10 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                      {product.discount}
+                    </div>
+
+               
+<div className="w-full flex justify-center align-center">
+  <img
+                    className="w-60 h-40 object-contain group-hover:scale-110 transition-transform duration-300"
+                    alt={product.name}
+                    src={product.images[featuredImageIndexes[product.id] ?? 0]}
+                  />
+</div>
+
+                  {/* Rating Badge */}
+                  <div className="absolute bottom-3 right-3 bg-white/90 rounded-lg px-2 py-1 flex items-center space-x-1">
+                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    <span className="text-xs font-semibold">{product.rating}</span>
+                  </div>
+                </div>
+
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2 group-hover:text-[#136ea1] transition-colors">
+                    {product.name}
+                  </h3>
+
+                  <div className="flex items-center mb-2">
+                    <div className="flex items-center mr-2">
+                      {renderStars(product.rating)}
+                    </div>
+                    <span className="text-sm text-gray-500">({product.reviews} reviews)</span>
+                  </div>
+
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xl font-bold text-[#136ea1]">{product.price}</span>
+                      <span className="text-sm text-gray-500 line-through">{product.originalPrice}</span>
+                    </div>
+                  </div>
+
+                  <Link to={`/quotation/${product.id}`}>
+                    <Button className="w-full bg-[#136ea1] hover:bg-[#0f5a8a] transform hover:scale-105 transition-all duration-200">
+                      Get a Quotation
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+
       {/* Video Section */}
       <section className="py-12 lg:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -366,7 +570,7 @@ export const HomePage = (): JSX.Element => {
               Watch how our innovative technology provides superior comfort and protection
             </p>
           </div>
-          
+
           <div className="relative h-64 lg:h-96 rounded-2xl overflow-hidden shadow-2xl group">
             <img
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -386,6 +590,72 @@ export const HomePage = (): JSX.Element => {
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+
+      {/* Blog Section */}
+      <section className="py-16 px-4 md:px-8 lg:px-16">
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#136ea1] mb-4">
+            Latest from Our Blog
+          </h2>
+          <p className="text-gray-600">
+            Stay informed with our latest articles on health, wellness, and product updates
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {blogPosts.map((post, index) => (
+            <Card key={post.id} className="group hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+              <CardContent className="p-0">
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <img
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                    alt={post.title}
+                    src={post.image}
+                  />
+                  <div className="absolute top-3 left-3 bg-[#136ea1] text-white px-2 py-1 rounded-full text-xs font-semibold">
+                    {post.category}
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-gray-500 mb-3">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    <span className="mr-4">{new Date(post.date).toLocaleDateString()}</span>
+                    <User className="w-4 h-4 mr-1" />
+                    <span>{post.author}</span>
+                  </div>
+
+                  <h3 className="font-semibold text-lg mb-2 group-hover:text-[#136ea1] transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500">{post.readTime}</span>
+                    <Link to={`/blog/${post.id}`}>
+                      <Button variant="outline" size="sm" className="border-[#136ea1] text-[#136ea1] hover:bg-[#136ea1] hover:text-white transition-colors font-semibold">
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link to="/blog">
+            <Button className="bg-[#136ea1] hover:bg-[#0f5a8a] text-white px-8 py-3 font-semibold">
+              View All Articles
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -434,11 +704,10 @@ export const HomePage = (): JSX.Element => {
                 <button
                   key={index}
                   onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentTestimonial
                       ? "bg-[#136ea1] scale-125"
                       : "bg-gray-300 hover:bg-gray-400"
-                  }`}
+                    }`}
                 />
               ))}
             </div>

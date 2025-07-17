@@ -271,9 +271,9 @@ export const CareerPage = (): JSX.Element => {
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </Link>
-                      <Button variant="outline" size="sm" className="border-[#136ea1] text-[#136ea1] hover:bg-[#136ea1] hover:text-white">
+                      {/* <Button variant="outline" size="sm" className="border-[#136ea1] text-[#136ea1] hover:bg-[#136ea1] hover:text-white">
                         View Details
-                      </Button>
+                      </Button> */}
                     </div>
                   </div>
                 </CardContent>
