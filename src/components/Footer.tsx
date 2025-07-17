@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
-import logo from "../assets/flycare_logo.png";
+import logo from "../assets/Flycare_logo.png";
 export const Footer = (): JSX.Element => {
   const usefulLinks = [
     { text: "Our Products", path: "/sanitary-pads" },

@@ -8,7 +8,7 @@ import {
   NavigationMenuList,
 } from "./ui/navigation-menu";
 import { ChevronDown, Menu, X, ShoppingCart } from "lucide-react";
-import logo from "../assets/flycare_logo.png";
+import logo from "../assets/Flycare_logo.png";
 
 export const Header = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
